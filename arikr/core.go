@@ -4,15 +4,15 @@ import "fmt"
 
 // Core is a single emulated CPU core.
 type Core struct {
-	Array [8]uint8
+	Array [8]byte
 	Index uint8
-	Opers map[uint8]OperFunc
-	Store []uint8
+	Opers map[byte]OperFunc
+	Store []byte
 }
 
 // NewCore returns a new Core containing a program and default operators.
 func NewCore(elems []byte) *Core {
-	return &Core{[8]uint8{}, 0, Opers, elems}
+	return &Core{[8]byte{}, 0, Opers, elems}
 }
 
 // Execute executes the next instruction in the Core.
