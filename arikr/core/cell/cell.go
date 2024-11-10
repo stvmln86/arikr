@@ -1,4 +1,4 @@
-// Package cell implements the Cell type and functions.
+// Package cell implements the Cell type and methods.
 package cell
 
 import (
@@ -8,7 +8,7 @@ import (
 // Cell is a single byte in memory.
 type Cell byte
 
-// New returns a new Cell from an integer.
+// New returns a new Cell from a byte.
 func New(cell byte) Cell {
 	return Cell(cell)
 }
