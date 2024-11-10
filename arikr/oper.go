@@ -37,7 +37,7 @@ func OperNOOP(c *Core) error {
 
 // OperCOND (COND R I) jumps to index I if R is not zero.
 func OperCOND(c *Core) error {
-	elems, err := c.ReadN(2)
+	elems, err := c.GetN(2)
 	if err != nil {
 		return err
 	}
@@ -51,7 +51,7 @@ func OperCOND(c *Core) error {
 
 // OperJUMP (COND I) jumps to index I.
 func OperJUMP(c *Core) error {
-	elem, err := c.Read()
+	elem, err := c.Get()
 	if err != nil {
 		return err
 	}
@@ -62,7 +62,7 @@ func OperJUMP(c *Core) error {
 
 // OperLOAD (LOAD R I) loads integer I into register R.
 func OperLOAD(c *Core) error {
-	elems, err := c.ReadN(2)
+	elems, err := c.GetN(2)
 	if err != nil {
 		return err
 	}
@@ -73,7 +73,7 @@ func OperLOAD(c *Core) error {
 
 // OperDUMP (DUMP R) prints R to STDOUT as a numerical value.
 func OperDUMP(c *Core) error {
-	elem, err := c.Read()
+	elem, err := c.Get()
 	if err != nil {
 		return err
 	}
@@ -84,7 +84,7 @@ func OperDUMP(c *Core) error {
 
 // OperECHO (ECHO R) prints R to STDOUT as an ASCII character.
 func OperECHO(c *Core) error {
-	elem, err := c.Read()
+	elem, err := c.Get()
 	if err != nil {
 		return err
 	}
@@ -95,7 +95,7 @@ func OperECHO(c *Core) error {
 
 // OperADDI (ADDI R R) loads R + R into register 7.
 func OperADDI(c *Core) error {
-	elems, err := c.ReadN(2)
+	elems, err := c.GetN(2)
 	if err != nil {
 		return err
 	}
@@ -106,7 +106,7 @@ func OperADDI(c *Core) error {
 
 // OperISEQ (ISEQ R R) loads R == R into register 7.
 func OperISEQ(c *Core) error {
-	elems, err := c.ReadN(2)
+	elems, err := c.GetN(2)
 	if err != nil {
 		return err
 	}
