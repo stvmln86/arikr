@@ -15,20 +15,31 @@ func NewCore(elems []byte) *Core {
 	return &Core{[8]uint8{}, 0, Opers, elems}
 }
 
-// // Exec executes the next instruction in the Core.
-// func (c *Core) Exec() error {
-// 	oper, err := c.Read()
-// 	if err != nil {
-// 		return err
-// 	}
+// Exec executes the next instruction in the Core.
+func (c *Core) Exec() error {
+	oper, err := c.Read()
+	if err != nil {
+		return err
+	}
 
-// 	ofun, ok := c.Opers[oper]
-// 	if !ok {
-// 		return fmt.Errorf("operator %X does not exist", oper)
-// 	}
+	ofun, ok := c.Opers[oper]
+	if !ok {
+		return fmt.Errorf("operator %X does not exist", oper)
+	}
 
-// 	return ofun(c)
-// }
+	return ofun(c)
+}
+
+// ExecAll executes all instructions in the Core.
+func (c *Core) ExecAll() error {
+	for int(c.Index) < len(c.Store) {
+		if err := c.Exec(); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
 
 // Read returns the next byte from the Core's memory and increments the Index.
 func (c *Core) Read() (uint8, error) {

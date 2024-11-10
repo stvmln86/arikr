@@ -14,6 +14,28 @@ func TestNewCore(t *testing.T) {
 	assert.Equal(t, []byte{0x01, 0x02, 0x03}, core.Store)
 }
 
+func TestExec(t *testing.T) {
+	// setup
+	core := NewCore([]byte{0x13, 0x00, 0xFF})
+
+	// success
+	err := core.Exec()
+	assert.Equal(t, [8]uint8{0xFF, 0, 0, 0, 0, 0, 0, 0}, core.Array)
+	assert.Equal(t, uint8(0x03), core.Index)
+	assert.NoError(t, err)
+}
+
+func TestExecAll(t *testing.T) {
+	// setup
+	core := NewCore([]byte{0x13, 0x00, 0xFF})
+
+	// success
+	err := core.ExecAll()
+	assert.Equal(t, [8]uint8{0xFF, 0, 0, 0, 0, 0, 0, 0}, core.Array)
+	assert.Equal(t, uint8(0x03), core.Index)
+	assert.NoError(t, err)
+}
+
 func TestRead(t *testing.T) {
 	// setup
 	core := NewCore([]byte{0x01})
