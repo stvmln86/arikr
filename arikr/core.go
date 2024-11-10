@@ -6,12 +6,13 @@ import "fmt"
 type Core struct {
 	Array [8]uint8
 	Index uint8
+	Opers map[uint8]OperFunc
 	Store []uint8
 }
 
-// NewCore returns a new Core containing a program.
+// NewCore returns a new Core containing a program and default operators.
 func NewCore(elems []byte) *Core {
-	return &Core{[8]uint8{}, 0, elems}
+	return &Core{[8]uint8{}, 0, Opers, elems}
 }
 
 // Read returns the next byte from the Core's memory and increments the Index.

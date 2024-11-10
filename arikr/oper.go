@@ -11,24 +11,24 @@ type Oper byte
 // OperFunc is a function that performs operations.
 type OperFunc func(*Core, []byte) error
 
-// Constants for defined Opers.
-const (
+// Opers is a map of opcodes to OperFuncs.
+var Opers = map[uint8]OperFunc{
 	// Nil operators.
-	NOOP Oper = 0x00
+	0x00: OperNOOP,
 
 	// Program control operators.
-	COND Oper = 0x10
-	JUMP Oper = 0x12
-	LOAD Oper = 0x13
+	0x10: OperCOND,
+	0x12: OperJUMP,
+	0x13: OperLOAD,
 
 	// Input/output operators.
-	DUMP Oper = 0x20
-	ECHO Oper = 0x21
+	0x20: OperDUMP,
+	0x21: OperECHO,
 
 	// Calculation and logic operators.
-	ADDI Oper = 0x30
-	ISEQ Oper = 0x31
-)
+	0x30: OperADDI,
+	0x31: OperISEQ,
+}
 
 // OperNOOP (NOOP) does nothing.
 func OperNOOP(c *Core, elems []byte) error {
